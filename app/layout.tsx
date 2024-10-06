@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import dynamic from "next/dynamic";
 
 import { Nunito } from 'next/font/google'
 import Navbar from "./components/navbar/navbar";
+// import Model from "./components/modals/Modal"
+// const Navbar = dynamic(()=>import('./components/navbar/navbar'),{ssr : false})
+
+import ClientOnly from "./components/clientonly";
+import RegisterModel from "./components/modals/registerModal";
 
 const font = Nunito({
   subsets : ["latin"],
 })
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Grace",
@@ -33,7 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className = {font.className}>
-        <Navbar/>
+        <ClientOnly>
+          <RegisterModel/>
+          {/* <Model actionLabel="Submit" title="Hello World" isOpen /> */}
+          <Navbar/>
+        </ClientOnly>
+        {/* <Navbar/> */}
         {children}
       </body>
     </html>
