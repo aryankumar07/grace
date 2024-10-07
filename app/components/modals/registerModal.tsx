@@ -8,6 +8,10 @@ import { FieldValues,useForm,SubmitHandler } from 'react-hook-form'
 import useRegisterModel from '../../hooks/useRegisterModal'
 import Modal from './Modal'
 import Heading from '../Heading'
+import Input from '../inputs/Input'
+import { resolve } from 'path'
+import toast from 'react-hot-toast'
+import Button from '../button'
 
 const RegisterModel = ()=>{
     const registerModal = useRegisterModel()
@@ -18,7 +22,8 @@ const RegisterModel = ()=>{
         handleSubmit,
         formState : {
             errors
-        }
+        },
+        reset
     } = useForm<FieldValues>({
         defaultValues : {
             name : '',
@@ -28,25 +33,60 @@ const RegisterModel = ()=>{
     })
 
 
-    const onSubmit = (data : FieldValues)=>{
+    const onSubmit = async (data : FieldValues)=>{
         setIsloading(true)
 
         axios.post('/api/register',data)
         .then(()=>{
             registerModal.onClose
         })
-        .catch(()=>{
-            registerModal.onOpen
+        .catch((error)=>{
+            toast.error('Something Went Wrong Fething the data')
         })
         .finally(()=>{
             setIsloading(false)
         })
 
+        await new Promise((resolve)=>setTimeout(resolve,2000))
+        reset()
+        setIsloading(false)
+
     }
 
     const bodyContent = (
-        <div>
-             <Heading/>
+        <div className='flex flex-col gap-4'>
+             <Heading title='Welcone To Grace' subTitle='Create an Account!'/>
+             <Input id='email' label='Email' disabled={isLoading} register={register} errors={errors} required/>
+             <Input id='name' label='Name' disabled={isLoading} register={register} errors={errors} required/>
+             <Input id='password' type='password' label='Password' disabled={isLoading} register={register} errors={errors} required/>
+        </div>
+    )
+
+    const footerContent = (
+        <div className='flex flex-col gap-4 mt-3'>
+            <hr />
+            <Button
+            outline
+            label='Continue With Google'
+            icon={FcGoogle}
+            onClick={()=>{}}
+            />
+            <Button
+            outline
+            label='Continue With Github'
+            icon={AiFillGithub}
+            onClick={()=>{}}
+            />
+            <div className=' text-neutral-500 text-center mt-4 font-light'>
+                <div className='flex flex-row justify-center items-center gap-2'>
+                    <div>
+                        Already Have an Account?
+                    </div>
+                    <div className='text-neutral-800 cursor-pointer hover:underline'>
+                        Log In
+                    </div>
+                </div>
+            </div>
         </div>
     )
 
@@ -61,6 +101,7 @@ const RegisterModel = ()=>{
         onClose={registerModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}
+        footer={footerContent}
         />
     )
 }
