@@ -32,11 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className = {font.className}>
-        <ClientOnly>
+        <ClientOnly children={
+          <>
+          <Navbar/>
           <ToasterProvider/>
           <RegisterModel/>
-          <Navbar/>
-        </ClientOnly>
+          </>
+        } />
         {/* <Navbar/> */}
         {children}
       </body>
