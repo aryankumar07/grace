@@ -1,19 +1,23 @@
 'use client'
 
 import axios from 'axios'
+import { signIn } from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc' 
 import { useCallback, useState } from 'react'
 import { FieldValues,useForm,SubmitHandler } from 'react-hook-form'
-import useRegisterModel from '../../hooks/useRegisterModal'
+import useLoginModel from '../../hooks/useLoginModel'
+import useRegisterModel from '@/app/hooks/useRegisterModal'
 import Modal from './Modal'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
-import { resolve } from 'path'
 import {toast} from 'react-hot-toast'
 import Button from '../button'
+import { useRouter } from 'next/navigation'
 
-const RegisterModel = ()=>{
+const LoginModal = ()=>{
+    const router = useRouter()
+    const loginModal = useLoginModel()
     const registerModal = useRegisterModel()
     const [isLoading,setIsloading] = useState(false)
 
@@ -26,38 +30,40 @@ const RegisterModel = ()=>{
         reset
     } = useForm<FieldValues>({
         defaultValues : {
-            name : '',
             email : '',
             password : ''
         }
     })
 
 
-    const onSubmit = async (data : FieldValues)=>{
+    const onSubmit =  (data : FieldValues)=>{
         setIsloading(true)
 
-        axios.post('/api/register',data)
-        .then(()=>{
-            registerModal.onClose
+        signIn('credentials',{
+            ...data,
+            redirect : false
         })
-        .catch((error)=>{
-            toast.error('Something Went Wrong Fething the data')
-        })
-        .finally(()=>{
+        .then((callback)=>{
             setIsloading(false)
-        })
 
-        await new Promise((resolve)=>setTimeout(resolve,2000))
-        reset()
-        setIsloading(false)
+            if(callback?.ok){
+                toast.success('Successfull Loged IN')
+                router.refresh()
+                loginModal.onClose()
+            }
+
+            if(callback?.error){
+                toast.error(callback.error)
+            }
+
+        })
 
     }
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
-             <Heading title='Welcone To Grace' subTitle='Create an Account!'/>
+             <Heading title='Welcone Back ' subTitle='Vist your Grace'/>
              <Input id='email' label='Email' disabled={isLoading} register={register} errors={errors} required/>
-             <Input id='name' label='Name' disabled={isLoading} register={register} errors={errors} required/>
              <Input id='password' type='password' label='Password' disabled={isLoading} register={register} errors={errors} required/>
         </div>
     )
@@ -95,10 +101,10 @@ const RegisterModel = ()=>{
     return (
         <Modal
         disabled = {isLoading}
-        isOpen = {registerModal.isOpen}
-        title='Register'
+        isOpen = {loginModal.isOpen}
+        title='Login'
         actionLabel='Continue'
-        onClose={registerModal.onClose}
+        onClose={loginModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         body={bodyContent}
         footer={footerContent}
@@ -106,4 +112,4 @@ const RegisterModel = ()=>{
     )
 }
 
-export default RegisterModel
+export default LoginModal
