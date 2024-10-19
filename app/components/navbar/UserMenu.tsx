@@ -44,7 +44,7 @@ const UserMenu : React.FC<userMenuProps> = ({
           >
             <AiOutlineMenu />
             <div>
-              <Avatar />
+              <Avatar src={currentUser?.image} />
             </div>
           </div>
         </div>
