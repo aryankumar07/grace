@@ -6,6 +6,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { useCallback, useState } from 'react'
 import { FieldValues,useForm,SubmitHandler } from 'react-hook-form'
 import useRegisterModel from '../../hooks/useRegisterModal'
+import useLoginModel from '../../hooks/useLoginModel'
 import Modal from './Modal'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
@@ -14,8 +15,10 @@ import {toast} from 'react-hot-toast'
 import Button from '../button'
 import { signIn } from 'next-auth/react'
 
+
 const RegisterModel = ()=>{
     const registerModal = useRegisterModel()
+    const loginModel = useLoginModel()
     const [isLoading,setIsloading] = useState(false)
 
     const {
@@ -32,11 +35,18 @@ const RegisterModel = ()=>{
             password : ''
         }
     })
+    
+    
+    const toggle = useCallback(() => {
+      registerModal.onClose();
+      loginModel.onOpen();
+    }, [loginModel , registerModal]);
+
+
 
 
     const onSubmit = async (data : FieldValues)=>{
         setIsloading(true)
-
         axios.post('/api/register',data)
         .then(()=>{
             registerModal.onClose
@@ -51,7 +61,8 @@ const RegisterModel = ()=>{
         await new Promise((resolve)=>setTimeout(resolve,2000))
         reset()
         setIsloading(false)
-
+        toast.success(' Your Grace Has Been set Active please Login ')
+        registerModal.onClose()
     }
 
     const bodyContent = (
@@ -83,7 +94,9 @@ const RegisterModel = ()=>{
                     <div>
                         Already Have an Account?
                     </div>
-                    <div className='text-neutral-800 cursor-pointer hover:underline'>
+                    <div 
+                    onClick={toggle}
+                    className='text-neutral-800 cursor-pointer hover:underline'>
                         Log In
                     </div>
                 </div>

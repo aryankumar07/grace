@@ -2,18 +2,22 @@
 
 import { AiOutlineMenu } from "react-icons/ai"
 import Avatar from "../avatar"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import MenuItem from "./MenuItem"
 import RegisterModel from "../modals/registerModal"
 import useLoginModel from '../../hooks/useLoginModel'
 import useRegisterModel from "@/app/hooks/useRegisterModal"
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types"
+import toast from "react-hot-toast"
+import useRentModel from "@/app/hooks/useRentModel"
 
 
 interface userMenuProps {
     currentUser? : SafeUser | null
 }
+
+
 
 const UserMenu : React.FC<userMenuProps> = ({
     currentUser
@@ -21,12 +25,21 @@ const UserMenu : React.FC<userMenuProps> = ({
 
     const registerModel = useRegisterModel();
     const loginModel = useLoginModel();
+    const rentModel = useRentModel()
 
     const [isOpen, setIsOpen] = useState(false)
+    
 
     const toggleOpen = useCallback(()=>{
         setIsOpen((value)=>!value)
-    },[])
+    },[]);
+
+    const onRent = useCallback(()=>{
+      if(!currentUser){
+        return loginModel.onOpen();
+      }
+      rentModel.onOpen()
+    },[loginModel,currentUser,rentModel]);
 
 
     return (
@@ -34,7 +47,7 @@ const UserMenu : React.FC<userMenuProps> = ({
         <div className="flex flex-row items-center gap-3">
           <div
             className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-            onClick={() => {}}
+            onClick={onRent}
           >
             Set Grace at Home
           </div>
@@ -58,7 +71,7 @@ const UserMenu : React.FC<userMenuProps> = ({
                     <MenuItem onClick={()=>{}} label="My Favourities" />
                     <MenuItem onClick={()=>{}} label="My Reservations" />
                     <MenuItem onClick={()=>{}} label="My Properties" />
-                    <MenuItem onClick={()=>{}} label="Grace Your Home" />
+                    <MenuItem onClick={rentModel.onOpen} label="Grace Your Home" />
                     <hr />
                     <MenuItem onClick={()=>signOut()} label="Sign Out" />
                   </>
