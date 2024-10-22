@@ -23,9 +23,6 @@ const CategoryBox : React.FC<CategoryBoxProps> = ({
     const handleClick = useCallback(()=>{
         let currentQuery = {};
 
-        console.log(params)
-        console.log(pathname)
-
         if(params){
             currentQuery = qs.parse(params.toString())
         }

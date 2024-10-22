@@ -6,6 +6,8 @@ import Heading from "../Heading"
 import { categories } from "../navbar/categories"
 import CategoryInput from "../inputs/categoryInput"
 import { FieldValues, useForm } from "react-hook-form"
+import CountrySelect from "../inputs/countrySelect"
+import dynamic from "next/dynamic"
 
 
 enum STEPS {
@@ -44,8 +46,13 @@ const RentModel = ()=>{
     });
 
     const category = watch('category')
+    const location = watch('location')
 
-    const setCustomValue = (id : string, value : string)=>{
+    const Maps = useMemo(() => dynamic(() => import('../map'),{
+      ssr : false
+    }) ,[location])
+
+    const setCustomValue = (id : string, value : any)=>{
         setValue(id,value,{
             shouldDirty : true,
             shouldTouch : true,
@@ -103,6 +110,23 @@ const RentModel = ()=>{
             </div>
         </div>
     )
+
+    if(step === STEPS.LOCATION){
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Where is Your Place Located?"
+                    subTitle="help Guest Find You!" />
+                  <CountrySelect
+                  value={location}
+                  onchange={ (value) => {
+                      console.log(value)
+                      setCustomValue("location", value);
+                  }}/>
+                <Maps center={location?.latlng} />
+            </div>
+        )
+    }
 
 
     return (
