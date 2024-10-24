@@ -46,8 +46,9 @@ export default async function RootLayout({
             </>
           }
         />
-        {/* <Navbar/> */}
-        {children}
+        {/* <div className="pb-20 pt-28">
+          {children}
+        </div> */}
       </body>
     </html>
   );
