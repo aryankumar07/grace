@@ -89,6 +89,11 @@ const RentModel = ()=>{
         return onNext();
       }
 
+      if(data.imageSrc === ''){
+        toast.error('please Provide a single Image')
+        return;
+      }
+
       setisLoading(true)
       axios.post('/api/listings',data)
       .then(()=>{

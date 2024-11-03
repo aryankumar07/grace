@@ -21,67 +21,67 @@ export const categories = [
   {
     label: "WindMills",
     icon: GiWindmill,
-    decsription: "This Property has windmills",
+    description: "This Property has windmills",
   },
   {
     label: "Modern",
     icon: MdOutlineVilla,
-    decsription: "This Property is mordern",
+    description: "This Property is mordern",
   },
   {
     label: "CountrySide",
     icon: TbMountain,
-    decsription: "This Property is countryside",
+    description: "This Property is countryside",
   },
   {
     label: "Pools",
     icon: TbPool,
-    decsription: "This Property has a pool",
+    description: "This Property has a pool",
   },
   {
     label: "islands",
     icon: GiIsland,
-    decsription: "This Property is on a lake",
+    description: "This Property is on a lake",
   },
   {
     label: "Lake",
     icon: GiBoatFishing,
-    decsription: "This Property is on a lake",
+    description: "This Property is on a lake",
   },
   {
     label: "sking",
     icon: FaSkiing,
-    decsription: "This Property has skiing activities",
+    description: "This Property has skiing activities",
   },
   {
     label: "camping",
     icon: GiForestCamp,
-    decsription: "This Property is near a forest",
+    description: "This Property is near a forest",
   },
   {
     label: "artic",
     icon: BsSnow,
-    decsription: "This Property is near snow",
+    description: "This Property is near snow",
   },
   {
     label: "cave",
     icon: GiCaveEntrance,
-    decsription: "This Property is near a cave",
+    description: "This Property is near a cave",
   },
   {
     label: "desert",
     icon: GiCactus,
-    decsription: "This Property is in the desert",
+    description: "This Property is in the desert",
   },
   {
     label: "barns",
     icon: GiBarn,
-    decsription: "This Property is in the barn",
+    description: "This Property is in the barn",
   },
   {
     label: "lux",
     icon: GiDiamonds,
-    decsription: "This Property is luxuroius",
+    description: "This Property is luxuroius",
   },
 
 ];
