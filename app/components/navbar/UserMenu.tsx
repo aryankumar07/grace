@@ -11,6 +11,7 @@ import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types"
 import toast from "react-hot-toast"
 import useRentModel from "@/app/hooks/useRentModel"
+import { useRouter } from "next/navigation"
 
 
 interface userMenuProps {
@@ -26,6 +27,7 @@ const UserMenu : React.FC<userMenuProps> = ({
     const registerModel = useRegisterModel();
     const loginModel = useLoginModel();
     const rentModel = useRentModel()
+    const router = useRouter()
 
     const [isOpen, setIsOpen] = useState(false)
     
@@ -67,7 +69,7 @@ const UserMenu : React.FC<userMenuProps> = ({
               {currentUser ? (
                 <>
                   <>
-                    <MenuItem onClick={()=>{}} label="MY Trips" />
+                    <MenuItem onClick={()=> router.push('/trips') } label="MY Trips" />
                     <MenuItem onClick={()=>{}} label="My Favourities" />
                     <MenuItem onClick={()=>{}} label="My Reservations" />
                     <MenuItem onClick={()=>{}} label="My Properties" />
