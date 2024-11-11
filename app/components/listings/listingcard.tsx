@@ -43,7 +43,6 @@ const ListingCard : React.FC<ListingCardProps> = ({
         if(disabled){
             return;
         }
-
         onAction?.(actionId)
     },[onAction,actionId,disabled])
 
