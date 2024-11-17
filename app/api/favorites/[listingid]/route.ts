@@ -38,34 +38,31 @@ export async function POST(
 
 
 export async function DELETE(
-    request : Request,
-    { params } : { params : Iparams }
-) {
-    const currentUser = await getCurrentUser()
-    if(!currentUser){
-        return NextResponse.error()
-    }
+    request: Request,
+    { params }: { params: Iparams }) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return NextResponse.error();
+  }
 
-    
-    const {listingid} = params
-    
-    if (!listingid || typeof listingid !== "string") {
-      throw new Error("Invalid ID");
-    }
+  const { listingid } = params;
 
-    let favouriteIds = [...(currentUser.favouriteIds) || []]
+  if (!listingid || typeof listingid !== "string") {
+    throw new Error("Invalid ID");
+  }
 
-    favouriteIds =  favouriteIds.filter((id) => id!==listingid)
+  let favouriteIds = [...(currentUser.favouriteIds || [])];
 
-    const user = await prisma.user.update({
-        where : {
-            id : currentUser.id
-        },
-        data : {
-            favouriteIds
-        }
-    })
+  favouriteIds = favouriteIds.filter((id) => id !== listingid);
 
-    return NextResponse.json(user)
+  const user = await prisma.user.update({
+    where: {
+      id: currentUser.id,
+    },
+    data: {
+      favouriteIds,
+    },
+  });
 
+  return NextResponse.json(user);
 }
