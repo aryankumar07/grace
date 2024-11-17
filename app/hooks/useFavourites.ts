@@ -43,6 +43,7 @@ const useFavourite = ({
             router.refresh()
             toast.success("Success")
         }catch(e){
+            console.log(e)
             toast.error("something went wrong")
         }
 

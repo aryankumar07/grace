@@ -20,9 +20,9 @@ interface ListingInfoProps {
       }
     | undefined;
   description: string;
-  roomCount: Number;
-  guestCount: Number;
-  bathroomCount: Number;
+  roomCount: number;
+  guestCount: number;
+  bathroomCount: number;
   locationValue: string;
 }
 

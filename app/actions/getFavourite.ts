@@ -1,5 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentuser";
+import { Listings } from "@prisma/client";
 
 export default async function getFavourite() {
     try{
@@ -17,7 +18,7 @@ export default async function getFavourite() {
             }
         })
 
-        const safeFav = favourites.map((favourite)=>{
+        const safeFav = favourites.map((favourite : Listings)=>{
             return {
                 ...favourite,
                 createdAt : favourite.createdAt.toISOString() 
@@ -26,7 +27,7 @@ export default async function getFavourite() {
 
         return safeFav
 
-    }catch(error : any){
-        throw new Error(error)
+    }catch(error){
+        console.log(error)
     }
 }

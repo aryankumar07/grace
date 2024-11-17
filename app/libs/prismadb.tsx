@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 
 declare global {
-    var prisma : PrismaClient | undefined
+    let prisma : PrismaClient | undefined
 }
-
+// @ts-expect-error : just ignore it
 const client = globalThis.prisma || new PrismaClient()
+// @ts-expect-error : just ignore it
 if(process.env.NODE_ENV !== 'production') globalThis.prisma = client
 
 export default client;

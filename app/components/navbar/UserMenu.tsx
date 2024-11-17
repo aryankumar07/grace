@@ -2,14 +2,12 @@
 
 import { AiOutlineMenu } from "react-icons/ai"
 import Avatar from "../avatar"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useState } from "react"
 import MenuItem from "./MenuItem"
-import RegisterModel from "../modals/registerModal"
 import useLoginModel from '../../hooks/useLoginModel'
 import useRegisterModel from "@/app/hooks/useRegisterModal"
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types"
-import toast from "react-hot-toast"
 import useRentModel from "@/app/hooks/useRentModel"
 import { useRouter } from "next/navigation"
 

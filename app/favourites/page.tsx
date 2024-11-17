@@ -2,7 +2,6 @@ import getCurrentUser from "../actions/getCurrentuser"
 import EmptyState from "../components/emptystate"
 import ClientOnly from "../components/clientonly"
 import getFavourite from "../actions/getFavourite"
-import { defaultMaxListeners } from "events"
 import FavouriteClient from "./favouirteclinet"
 
 

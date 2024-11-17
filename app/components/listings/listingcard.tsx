@@ -1,7 +1,6 @@
 'use client'
 import useCountries from "@/app/hooks/useCountries"
 import { SafeListing, SafeReservations, SafeUser } from "@/app/types"
-import { Listings,Reservations, } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import React, { useCallback, useMemo } from "react"
 import { format } from 'date-fns'

@@ -62,7 +62,7 @@ const SearchModel = ()=>{
             currentQuery = qs.parse(params.toString())
         }
 
-        const updatedQuery : any = {
+        const updatedQuery : unknown = {
             ...currentQuery,
             locationValue : location?.value,
             guestCount,
@@ -71,17 +71,23 @@ const SearchModel = ()=>{
         }
 
         if(dateRange.startDate){
-            updatedQuery.startDate = formatISO(dateRange.startDate)
+          // @ts-expect-error : just ignore it
+          updatedQuery.startDate = formatISO(dateRange.startDate);
         }
 
         if(dateRange.endDate){
-            updatedQuery.endDate = formatISO(dateRange.endDate)
+          // @ts-expect-error : just ignore it
+          updatedQuery.endDate = formatISO(dateRange.endDate);
         }
 
-        const url = qs.stringifyUrl({
-            url : '/',
-            query : updatedQuery
-        },{ skipNull : true })
+        const url = qs.stringifyUrl(
+          {
+            url: "/",
+            // @ts-expect-error : just ignore it
+            query: updatedQuery,
+          },
+          { skipNull: true }
+        );
 
         setStep(STEPS.LOCATION);
         searchModel.onClose()

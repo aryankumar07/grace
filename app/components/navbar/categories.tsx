@@ -5,7 +5,7 @@ import Container from "../container"
 import { GiBarn, GiBoatFishing, GiCactus, GiCaveEntrance, GiDiamonds, GiForestCamp, GiIsland, GiWindmill } from "react-icons/gi"
 import { MdOutlineVilla } from "react-icons/md";
 import CategoryBox from "../categoryBox";
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { FaSkiing } from "react-icons/fa";
 import { BsSnow } from "react-icons/bs";
 

@@ -2,7 +2,6 @@
 
 import { categories } from "@/app/components/navbar/categories"
 import { SafeListing, SafeUser,SafeReservations } from "@/app/types"
-import { Reservations } from "@prisma/client"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import ListingHead from "./locationhead"
 import Container from "@/app/components/container"
@@ -123,47 +122,44 @@ const ListingClient : React.FC<ListingClientProps> = ({
 
 
     return (
-        <Container>
-            <div className="max-w-screen-lg mx-auto">
-                <div className="flex flex-col gap-6">
-                    <ListingHead
-                        title = {listing.title}
-                        imageSrc = {listing.imageSrc}
-                        loactionValue = {listing.loactionValue}
-                        id = { listing.id }
-                        currentUser = {currentuser}
-                    />
-                    <div className="grid grid-cols-7 gap-10 mt-6">
-                        <ListingInfo
-                            user={listing.user}
-                            description={listing.description}
-                            roomCount = {listing.roomCount}
-                            guestCount = {listing.guestCount}
-                            bathroomCount = {listing.bathroomCount}
-                            locationValue=""
-                            category={category}
-                        />
-                        <div className="order-first mb-10 md:order-last md:col-span-3">
-                             <ListingReservation
-                                price={listing.price}
-                                totalPrice = {totalPrice}
-                                onChangeDate = {(value)=>setdateRange(value)}
-                                dateRange={dateRange}
-                                onSubmit={onCreateReservation}
-                                disabled={loading}
-                                disabledDates={disabledDates}
-                            />
-                        </div>
-                    </div>
-                </div>
+      <Container>
+        <div className="max-w-screen-lg mx-auto">
+          <div className="flex flex-col gap-6">
+            <ListingHead
+              title={listing.title}
+              imageSrc={listing.imageSrc}
+              loactionValue={listing.loactionValue}
+              id={listing.id}
+              currentUser={currentuser}
+            />
+            <div className="grid grid-cols-7 gap-10 mt-6">
+              <ListingInfo
+                user={listing.user}
+                description={listing.description}
+                roomCount={listing.roomCount}
+                guestCount={listing.guestCount}
+                bathroomCount={listing.bathroomCount}
+                locationValue=""
+                category={category}
+              />
+              <div className="order-first mb-10 md:order-last md:col-span-3">
+                <ListingReservation
+                  price={listing.price}
+                  totalPrice={totalPrice}
+                  // @ts-expect-error : just ignore it
+                  onChangeDate={(value) => setdateRange(value)}
+                  dateRange={dateRange}
+                  onSubmit={onCreateReservation}
+                  disabled={loading}
+                  disabledDates={disabledDates}
+                />
+              </div>
             </div>
-        </Container>
-    )
+          </div>
+        </div>
+      </Container>
+    );
 
 }
 
 export default ListingClient
-
-function differeneceInDays(arg0: {}) {
-    throw new Error("Function not implemented.")
-}

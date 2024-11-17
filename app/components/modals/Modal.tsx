@@ -54,16 +54,6 @@ const Modal : React.FC<ModalProps> = ({
         onSubmit();
     },[disabled,onSubmit])
 
-    const handleSecondaryAction = useCallback(()=>{
-        if(disabled || !secondaryAction){
-            return ;
-        }
-        secondaryAction()
-    },[disabled,secondaryAction])
-
-
-
-
     // this function here is hamdling the rendering of the whole login page even the background of it 
     if(!isOpen){
         return null;

@@ -1,11 +1,9 @@
 'use client'
-
-import axios from 'axios'
 import { signIn } from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc' 
 import { useCallback, useState } from 'react'
-import { FieldValues,useForm,SubmitHandler } from 'react-hook-form'
+import { FieldValues,useForm} from 'react-hook-form'
 import useLoginModel from '../../hooks/useLoginModel'
 import useRegisterModel from '@/app/hooks/useRegisterModal'
 import Modal from './Modal'
@@ -27,7 +25,6 @@ const LoginModal = ()=>{
         formState : {
             errors
         },
-        reset
     } = useForm<FieldValues>({
         defaultValues : {
             email : '',

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import dynamic from "next/dynamic";
 
 import { Nunito } from "next/font/google";
 import Navbar from "./components/navbar/navbar";
@@ -36,21 +35,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ClientOnly
-          children={
-            <>
-              <Navbar currentUser={currentUser} />
-              <ToasterProvider />
-              <SearchModel/>
-              <LoginModal />
-              <RegisterModel />
-              <RentModel/>
-            </>
-          }
-        />
-        <div className="pb-20 pt-28">
-          {children}
-        </div>
+        <ClientOnly>
+          <Navbar currentUser={currentUser} />
+          <ToasterProvider />
+          <SearchModel />
+          <LoginModal />
+          <RegisterModel />
+          <RentModel />
+        </ClientOnly>
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );

@@ -35,7 +35,6 @@ const RentModel = ()=>{
     const {
       register,
       handleSubmit,
-      getValues,
       setValue,
       watch,
       reset,
@@ -65,7 +64,7 @@ const RentModel = ()=>{
       ssr : false
     }) ,[location])
 
-    const setCustomValue = (id : string, value : any)=>{
+    const setCustomValue = (id : string, value : unknown)=>{
         setValue(id,value,{
             shouldDirty : true,
             shouldTouch : true,
@@ -134,7 +133,7 @@ const RentModel = ()=>{
                 subTitle="Pick a Category"
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
-                {categories.map((item,index)=>{
+                {categories.map((item)=>{
                     return (
                         <div key={item.label} className="col-span-1">
                             <CategoryInput

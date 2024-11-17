@@ -1,6 +1,6 @@
 'use client'
 import  Container  from "@/app/components/container";
-import { SafeListing, SafeReservations, SafeUser } from "../types"
+import { SafeListing, SafeUser } from "../types"
 import Heading from "../components/Heading";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";

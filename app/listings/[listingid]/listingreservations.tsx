@@ -9,7 +9,7 @@ interface ListingReservationProps{
     price : number,
     dateRange : Range,
     totalPrice : number,
-    onChangeDate : (value : any) => void
+    onChangeDate : (value : unknown) => void
     onSubmit : ()=>void
     disabled? : boolean
     disabledDates : Date[] 

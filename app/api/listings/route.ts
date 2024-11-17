@@ -26,7 +26,7 @@ export async function POST(
         location
     } = body
 
-    Object.keys(body).forEach((value : any)=>{
+    Object.keys(body).forEach((value)=>{
         if(!body[value]){
             return NextResponse.error()
         }

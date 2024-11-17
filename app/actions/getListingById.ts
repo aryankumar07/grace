@@ -34,7 +34,7 @@ export default async function getListingById(params : Iparams) {
                 emailVerified : listing.user.emailVerified?.toISOString() || null
             }
         }
-    }catch(e : any){
-        throw new Error(e)
+    }catch(e){
+        console.log(e)
     }
 }

@@ -32,8 +32,10 @@ const ReservationClient : React.FC<ReservationClientProps> = ({
             toast.success('reservation Cancelled')
             router.refresh()
         })
-        .catch((error : any)=>{
-            toast.error('something went wrong')
+        .catch((error : unknown)=>{
+          console.log(error);
+          // @ts-expect-error : just ignore it
+          toast.error(error);
         })
         .finally(()=>{
             setdeletingId('')

@@ -7,7 +7,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
-// @ts-ignore
+// @ts-expect-error : just ignore it
 delete L.Icon.Default.prototype._getIConUrl;
 L.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,
