@@ -7,6 +7,9 @@ const nextConfig = {
       "res.cloudinary.com",
     ],
   },
+  experimental: {
+    serverActions: true,
+  },
 };
 
 export default nextConfig;
