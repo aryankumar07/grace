@@ -1,3 +1,5 @@
+"use server";
+
 import { Listings } from "@prisma/client";
 import prisma from "db";
 
@@ -12,7 +14,7 @@ export interface IListingParams {
   category?: string | undefined;
 }
 
-export default async function getListings(params : IListingParams) {
+export default async function getListings(params: IListingParams) {
   try {
     const {
       userId,
@@ -25,7 +27,7 @@ export default async function getListings(params : IListingParams) {
       category,
     } = params;
 
-    const query : Record<string,unknown> = {};
+    const query: Record<string, unknown> = {};
 
     if (userId) {
       query.userId = userId;
@@ -82,7 +84,7 @@ export default async function getListings(params : IListingParams) {
         createdAt: "desc",
       },
     });
-    const safeListing = listing.map((listing : Listings) => {
+    const safeListing = listing.map((listing: Listings) => {
       return {
         ...listing,
         createdAt: listing.createdAt.toISOString(),
@@ -90,6 +92,6 @@ export default async function getListings(params : IListingParams) {
     });
     return safeListing;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
