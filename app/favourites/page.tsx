@@ -35,3 +35,5 @@ const FavouritePage = async ()=>{
 }
 
 export default FavouritePage
+
+export const dynamic = "force-dynamic";

@@ -36,3 +36,5 @@ const ListingPage = async ( { params } : { params : Iparams} )=>{
 }
 
 export default ListingPage
+
+export const dynamic = "force-dynamic";

@@ -46,3 +46,5 @@ const propertiesPage = async () => {
 }
 
 export default propertiesPage;
+
+export const dynamic = "force-dynamic";

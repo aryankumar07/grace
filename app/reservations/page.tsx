@@ -44,3 +44,5 @@ const ReservationPage = async ()=>{
     )
 }
 export default ReservationPage
+
+export const dynamic = "force-dynamic";
