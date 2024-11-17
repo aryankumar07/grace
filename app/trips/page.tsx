@@ -37,4 +37,4 @@ const TripsPage = async () => {
 
 export default TripsPage;
 
-export const dynamic = "force-dynamic";
+export const revalidate = 0;
